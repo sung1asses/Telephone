@@ -8,9 +8,9 @@ class GuestController extends Controller
 {
 
     public function listNumbers(){
-    	// Number::order_by('name')->get();
+    	$numbers = Number::orderBy('name')->get();
 
-    	// return view('numbers', compact('numbers_list'));
+    	return view('numbers', compact('numbers'));
     } 
     public function findNumbers(Request $request){
     	

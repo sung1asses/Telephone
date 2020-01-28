@@ -12,6 +12,12 @@ class RedactorController extends Controller
         return view('admin.numbers.index', compact('numbers'));
     } 
     public function createNumbers(){
+name
+position
+cabinet
+email
+local_number
+telephone_number
         return redirect()->route('redactor.numbers.list')
                 ->with('succ', 'Очередь успешно создана...');
     } 
