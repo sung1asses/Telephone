@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Number;
+use App\Role;
 class AdminController extends Controller
 {
     public function home(){
-    	
+        return view('admin.home');
     } 
     public function listRedactor(){
     	$redactors = Role::where('group', 'redactor')->first()->users()->get();
@@ -34,7 +35,7 @@ class AdminController extends Controller
                 'name' => $name,
                 'email' => $email,
                 'password' => \Illuminate\Support\Facades\Hash::make($request['password']),
-            ])->attachRole(Role::where('group', 'operator')->first());
+            ])->attachRole(Role::where('group', 'redactor')->first());
         }
         return redirect()->route('admin.redactor.list')
                 ->with('succ', 'Очередь успешно создана...');

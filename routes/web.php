@@ -24,9 +24,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 	Route::middleware(['isAdmin'])->group(function () {
 
 		// Operators
-		Route::get('/redactor', 'AdminController@listRedactor')->name('admin.redactor.list');
-		Route::post('/redactor', 'AdminController@createRedactor')->name('admin.redactor.create');
-		Route::get('/redactor/{id}/delete', 'AdminController@deleteRedactor')->name('admin.redactor.delete');
+		Route::get('/redactors', 'AdminController@listRedactor')->name('admin.redactor.list');
+		Route::post('/redactors', 'AdminController@createRedactor')->name('admin.redactor.create');
+		Route::get('/redactors/{id}/delete', 'AdminController@deleteRedactor')->name('admin.redactor.delete');
 
   	});
 
