@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Number extends Model
+class Institute extends Model
 {
 	protected $guarded = [
 		'id'
 	];
-    public function institute()
+    public function numbers()
     {
-    	return $this->belongsTo('\App\Institute');
+    	return $this->hasMany('\App\Number');
     }
 }

@@ -4,19 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Список номеров</div>
-
-                <div class="card-body">
-                  <ol>
-                    @foreach($numbers as $number)
-                      <li>
-                        {{ $number->name }}
-                      </li>
-                    @endforeach
-                  </ol>
-                </div>
-            </div>
+          <live-search institutes_json="{{ $institutes }}" institutes_json="{{ $numbers }}"></live-search>
         </div>
     </div>
 </div>

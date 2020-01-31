@@ -18,9 +18,13 @@ class CreateNumbersTable extends Migration
             $table->string('name');
             $table->string('position');
             $table->string('cabinet');
-            $table->string('email')->nullable();
-            $table->integer('local_number');
-            $table->integer('telephone_number')->nullable();
+            $table->string('email');
+
+            $table->unsignedBigInteger('institute_id')->index();
+            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
+            
+            $table->string('local_number');
+            $table->string('telephone_number');
             $table->timestamps();
         });
     }
@@ -32,6 +36,9 @@ class CreateNumbersTable extends Migration
      */
     public function down()
     {
+        Schema::table('numbers', function (Blueprint $table) {
+            $table->dropForeign('numbers_institute_id_foreign');
+        });
         Schema::dropIfExists('numbers');
     }
 }

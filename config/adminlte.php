@@ -134,17 +134,17 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
 
     'logout_url' => 'logout',
 
     'login_url' => 'login',
 
-    'register_url' => 'register',
+    'register_url' => false, // 'register'
 
-    'password_reset_url' => 'password/reset',
+    'password_reset_url' => false, // 'password/reset'
 
-    'password_email_url' => 'password/email',
+    'password_email_url' => false, // 'password/email'
 
     /*
     |--------------------------------------------------------------------------
@@ -173,24 +173,38 @@ return [
     */
 
     'menu' => [
-        [
+        /*[
             'text' => 'search',
             'search' => true,
             'topnav' => true,
-        ],
+        ],*/
+        // Admin
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
+            'text'        => 'Редакторы',
+            'url'         => 'admin/redactors',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
+            'label'       => false, // true
             'label_color' => 'success',
+            'can'  => 'admin',
         ],
-        ['header' => 'account_settings'],
+        [
+            'text'        => 'Справочник',
+            'url'         => 'admin/numbers',
+            'icon'        => 'far fa-fw fa-user',
+            'label'       => false, // true
+            'label_color' => 'success',
+            'can'  => 'redactor',
+        ],
+        // Operator
+        [
+            'text'        => 'Структура университета',
+            'url'         => 'admin/institutes',
+            'icon'        => 'far fa-fw fa-file',
+            'label'       => false, // true
+            'label_color' => 'success',
+            'can'  => 'redactor',
+        ],
+        /*['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url'  => 'admin/settings',
@@ -238,8 +252,8 @@ return [
                     'url'  => '#',
                 ],
             ],
-        ],
-        ['header' => 'labels'],
+        ],*/
+        /*['header' => 'labels'],
         [
             'text'       => 'important',
             'icon_color' => 'red',
@@ -251,7 +265,7 @@ return [
         [
             'text'       => 'information',
             'icon_color' => 'aqua',
-        ],
+        ],*/
     ],
 
     /*
@@ -296,17 +310,12 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
+                    'location' => '//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+                    'location' => '//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css',
                 ],
             ],
         ],

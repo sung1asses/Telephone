@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('redactor', function ($user) {
-            if($user->hasRole('redactor'))
+            if($user->hasRole('redactor') || $user->hasRole('admin'))
             {
                 return true;
             }
