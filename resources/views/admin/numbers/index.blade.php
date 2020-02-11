@@ -58,8 +58,9 @@
             </form>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card card-primary">
+    <div class="col-12">
+      
+        <!-- <div class="card card-primary">
             <div class="card-header with-border">
               <h3 class="card-title">Список</h3>
             </div>
@@ -73,7 +74,7 @@
               </div>
             @endforeach
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 @endsection

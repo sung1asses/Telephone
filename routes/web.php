@@ -23,6 +23,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 	
 	Route::middleware(['isAdmin'])->group(function () {
 
+		Route::get('/numbers/export', 'AdminController@export')->name('admin.numbers.export');
+
 		// Operators
 		Route::get('/redactors', 'AdminController@listRedactor')->name('admin.redactor.list');
 		Route::post('/redactors', 'AdminController@createRedactor')->name('admin.redactor.create');

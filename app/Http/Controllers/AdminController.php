@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 use App\Number;
 use App\Role;
@@ -45,4 +46,10 @@ class AdminController extends Controller
         return redirect()->route('admin.redactor.list')
                 ->with('succ', 'Очередь успешно создана...');
     } 
+
+    public function export() 
+    {
+        return Excel::download(new \App\Exports\NumberExport, 'numbers.xlsx');
+    }
+
 }

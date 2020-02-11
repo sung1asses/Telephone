@@ -1918,23 +1918,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['numbers_json', 'intitutes_json'],
+  props: ['institutes_json'],
   data: function data() {
     return {
-      status: JSON.parse(this.operator_status),
-      main_list: [],
+      search: '',
+      main_list: JSON.parse(this.institutes_json),
       search_list: []
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log(this.main_list);
+    this.filteredList();
+  },
+  computed: {},
   methods: {
-    make_main_list: function make_main_list() {
-      var numbers = JSON.parse(this.numbers_json);
-      var intitutes = JSON.parse(this.intitutes_json);
-      $.each(intitutes, function (key, value) {
-        this.main_list.push(key);
-        console.log(this.main_list); // foreach(number in numbers)
+    filteredList: function filteredList() {
+      var _this = this;
+
+      this.search_list = [];
+      var value = this.search.toLowerCase();
+      this.main_list.forEach(function (item) {
+        var elements = item.numbers.filter(function (number) {
+          return number.name.toLowerCase().indexOf(value) > -1 || number.position.toLowerCase().indexOf(value) > -1 || number.cabinet.toLowerCase().indexOf(value) > -1;
+        });
+
+        if (elements.length > 0) {
+          var new_item = item;
+          new_item.numbers = elements;
+
+          _this.search_list.push(new_item);
+        }
       });
     }
   }
@@ -37312,16 +37357,154 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "search-wrapper" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.search,
+                expression: "search"
+              }
+            ],
+            attrs: { type: "text", placeholder: "Поиск..." },
+            domProps: { value: _vm.search },
+            on: {
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.search = $event.target.value
+                },
+                _vm.filteredList
+              ]
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._l(_vm.search_list, function(item) {
+              return _c("table", { staticClass: "table" }, [
+                _c("thead", { staticClass: "thead-dark" }, [
+                  _c("tr", [
+                    _c(
+                      "th",
+                      {
+                        staticClass: "text-center",
+                        attrs: { colspan: "6", scope: "col" }
+                      },
+                      [_vm._v(_vm._s(item.name))]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(item.numbers, function(number) {
+                    return _c("tr", [
+                      _c(
+                        "th",
+                        {
+                          staticClass: "col-2 align-middle",
+                          attrs: { scope: "row" }
+                        },
+                        [_vm._v(_vm._s(number.local_number))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "th",
+                        {
+                          staticClass: "col-2 align-middle",
+                          attrs: { scope: "col" }
+                        },
+                        [_vm._v(_vm._s(number.name))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "th",
+                        {
+                          staticClass: "col-2 align-middle",
+                          attrs: { scope: "col" }
+                        },
+                        [_vm._v(_vm._s(number.position))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "th",
+                        {
+                          staticClass: "col-2 align-middle",
+                          attrs: { scope: "col" }
+                        },
+                        [_vm._v(_vm._s(number.cabinet))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "th",
+                        {
+                          staticClass: "col-2 align-middle",
+                          attrs: { scope: "col" }
+                        },
+                        [_vm._v(_vm._s(number.email))]
+                      )
+                    ])
+                  }),
+                  0
+                )
+              ])
+            })
+          ],
+          2
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" })
+    return _c("table", { staticClass: "table" }, [
+      _c("thead", { staticClass: "thead-dark" }, [
+        _c("tr", [
+          _c(
+            "th",
+            { staticClass: "col-2 align-middle", attrs: { scope: "row" } },
+            [_vm._v("Присвоенные номера")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
+            [_vm._v("Ф.И.О.")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
+            [_vm._v("Подразделение/Должность")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
+            [_vm._v("Кабинет")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
+            [_vm._v("E-mail")]
+          )
+        ])
       ])
     ])
   }
@@ -49514,7 +49697,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', __webpack_require__(/*! ./components/LiveSearch.vue */ "./resources/js/components/LiveSearch.vue")["default"]);
+Vue.component('live-search', __webpack_require__(/*! ./components/LiveSearch.vue */ "./resources/js/components/LiveSearch.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49576,15 +49759,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!************************************************!*\
   !*** ./resources/js/components/LiveSearch.vue ***!
   \************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LiveSearch_vue_vue_type_template_id_3f86545f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LiveSearch.vue?vue&type=template&id=3f86545f& */ "./resources/js/components/LiveSearch.vue?vue&type=template&id=3f86545f&");
 /* harmony import */ var _LiveSearch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LiveSearch.vue?vue&type=script&lang=js& */ "./resources/js/components/LiveSearch.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _LiveSearch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _LiveSearch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -49614,7 +49796,7 @@ component.options.__file = "resources/js/components/LiveSearch.vue"
 /*!*************************************************************************!*\
   !*** ./resources/js/components/LiveSearch.vue?vue&type=script&lang=js& ***!
   \*************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

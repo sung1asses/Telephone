@@ -9,9 +9,10 @@ class GuestController extends Controller
 {
 
     public function listNumbers(){
-    	$numbers = Number::orderBy('name')->get();
-        $institutes = Institute::get();
-    	return view('numbers', compact('numbers','institutes'));
+        $institutes = Institute::with('numbers')->get();
+        // $institutes->makeHidden('telephone_number');
+        // dd($institutes[0]->numbers);
+    	return view('numbers', compact('institutes'));
     } 
     public function findNumbers(Request $request){
     	

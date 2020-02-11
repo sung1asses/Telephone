@@ -110,5 +110,10 @@ class DatabaseSeeder extends Seeder
 		];
 
         \App\Institute::insert($data);
+
+        $this->call([
+	        NumbersSeeder::class,
+	    ]);
+
     }
 }
