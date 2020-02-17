@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Телефонный справочник',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => 'Звони на <b>АТС</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image-xl',
     'logo_img_xl' => null,
@@ -182,20 +182,28 @@ return [
         [
             'text'        => 'Редакторы',
             'url'         => 'admin/redactors',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'far fa-fw fa-user',
             'label'       => false, // true
             'label_color' => 'success',
             'can'  => 'admin',
         ],
         [
+            'text'        => 'Пользователи',
+            'url'         => 'admin/watchers',
+            'icon'        => 'far fa-fw fa-user',
+            'label'       => false, // true
+            'label_color' => 'success',
+            'can'  => 'admin',
+        ],
+        // Operator
+        [
             'text'        => 'Справочник',
             'url'         => 'admin/numbers',
-            'icon'        => 'far fa-fw fa-user',
+            'icon'        => 'far fa-fw fa-file',
             'label'       => false, // true
             'label_color' => 'success',
             'can'  => 'redactor',
         ],
-        // Operator
         [
             'text'        => 'Структура университета',
             'url'         => 'admin/institutes',

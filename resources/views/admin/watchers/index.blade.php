@@ -3,7 +3,7 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1>Работа с редакторами</h1>
+    <h1>Работа с пользователями</h1>
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
           <div class="card-header with-border">
             <h3 class="card-title">Создание редактора</h3>
           </div>
-          <form method="POST" enctype="multipart/form-data" action="{{ route('admin.redactor.create') }}">
+          <form method="POST" enctype="multipart/form-data" action="{{ route('admin.watcher.create') }}">
               <div class="card-body">
                 {{ csrf_field() }}
                 
@@ -55,13 +55,13 @@
     <div class="col-md-6">
         <div class="card card-primary">
             <div class="card-header with-border">
-              <h3 class="card-title">Список редакторов</h3>
+              <h3 class="card-title">Список пользователей</h3>
             </div>
             <div class="card-body">
-            @foreach($redactors as $redactor)
+            @foreach($watchers as $watcher)
               <div class="d-flex justify-content-between align-items-center">
-                <p>{{ $redactor->name }}</p>
-                <a href="{{ route('admin.redactor.delete',['id'=> $redactor->id]) }}">
+                <p>{{ $watcher->name }}</p>
+                <a href="{{ route('admin.watcher.delete',['id'=> $watcher->id]) }}">
                   {{ __('Удалить') }}
                 </a>
               </div>

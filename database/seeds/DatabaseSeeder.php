@@ -31,6 +31,13 @@ class DatabaseSeeder extends Seeder
 	        'group' => 'redactor' // optional, set as 'default' by default
 	    ]);
 
+	    $watcherRole = \HttpOz\Roles\Models\Role::create([
+	        'name' => 'Watcher',
+	        'slug' => 'watcher',
+	        'description' => 'watch numbers.', // optional
+	        'group' => 'watcher' // optional, set as 'default' by default
+	    ]);
+
         \App\User::create([
 	        'name' => 'Suvorov Roman',
 	        'email' => 'suvorov_roman@redactor.redactor',

@@ -20,16 +20,15 @@ class RedactorController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'position' => ['required', 'string', 'max:255'],
                 'cabinet' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255'],
                 'local_number' => ['required', 'digits:4'],
                 'telephone_number' => ['required', 'digits:10'],
             ]);
 
             if($validation->fails()) {
-                dd($validation);
                 return redirect()->route('redactor.numbers.list')
                             ->withInput()
-                            ->with('error', 'Ошибка ввода');
+                            ->withErrors($validation);
             };
             if(!$institute->numbers()->where("name",$request['name'])->first()){
                 $institute->numbers()->create([
@@ -68,7 +67,7 @@ class RedactorController extends Controller
             if($validation->fails()) {
                 return redirect()->route('redactor.institutes.list')
                             ->withInput()
-                            ->with('error', 'Ошибка ввода');
+                            ->withErrors($validation);
             };
             Institute::create([
                 'name' => $request['name'],

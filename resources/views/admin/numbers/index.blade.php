@@ -30,26 +30,44 @@
                     <div class="form-group">
                        <label for="name" class="col-md-5 col-form-label text-md-right">{{ __('ФИО сотрудника') }}</label>
                        <input type="text" min="0" class="form-control" value="{{ old('name') }}" name="name" required="">
+                      @error('name')
+                          <div class="text-danger p-2">{{ $message }}</div>
+                      @enderror
                     </div>
                     <div class="form-group">
                        <label for="name" class="col-md-5 col-form-label text-md-right">{{ __('Должность') }}</label>
                        <input type="text" min="0" class="form-control" value="{{ old('position') }}" name="position" required="">
+                      @error('position')
+                          <div class="text-danger p-2">{{ $message }}</div>
+                      @enderror
                     </div>
                     <div class="form-group">
                        <label for="name" class="col-md-5 col-form-label text-md-right">{{ __('Кабинет') }}</label>
                        <input type="text" min="0" class="form-control" value="{{ old('cabinet') }}" name="cabinet" required="">
+                      @error('cabinet')
+                          <div class="text-danger p-2">{{ $message }}</div>
+                      @enderror
                     </div>
                     <div class="form-group">
                        <label for="name" class="col-md-5 col-form-label text-md-right">{{ __('Почта') }}</label>
                        <input type="text" min="0" class="form-control" value="{{ old('email') }}" name="email" required="">
+                      @error('email')
+                          <div class="text-danger p-2">{{ $message }}</div>
+                      @enderror
                     </div>
                     <div class="form-group">
                        <label for="name" class="col-md-5 col-form-label text-md-right">{{ __('Корпоративный номер') }}</label>
                        <input type="text" min="0" class="form-control" value="{{ old('local_number') }}" name="local_number" required="">
+                      @error('local_number')
+                          <div class="text-danger p-2">{{ $message }}</div>
+                      @enderror
                     </div>
                     <div class="form-group">
                        <label for="name" class="col-md-5 col-form-label text-md-right">{{ __('Телефонный номер') }}</label>
                        <input type="text" min="0" class="form-control" value="{{ old('telephone_number') }}" name="telephone_number" required="">
+                      @error('telephone_number')
+                          <div class="text-danger p-2">{{ $message }}</div>
+                      @enderror
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Отправить</button>

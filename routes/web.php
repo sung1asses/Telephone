@@ -20,26 +20,35 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
 	Route::get('/', 'AdminController@home');
-	
+	Route::get('/export/full', 'AdminController@exportFull')->name('admin.numbers.full');
+
 	Route::middleware(['isAdmin'])->group(function () {
 
-		Route::get('/numbers/export', 'AdminController@export')->name('admin.numbers.export');
-
-		// Operators
+		// Redactors
 		Route::get('/redactors', 'AdminController@listRedactor')->name('admin.redactor.list');
 		Route::post('/redactors', 'AdminController@createRedactor')->name('admin.redactor.create');
 		Route::get('/redactors/{id}/delete', 'AdminController@deleteRedactor')->name('admin.redactor.delete');
 
+		// Watchers
+		Route::get('/watchers', 'AdminController@listWatcher')->name('admin.watcher.list');
+		Route::post('/watchers', 'AdminController@createWatcher')->name('admin.watcher.create');
+		Route::get('/watchers/{id}/delete', 'AdminController@deleteWatcher')->name('admin.watcher.delete');
+
   	});
 
-	Route::get('/numbers', 'RedactorController@listNumbers')->name('redactor.numbers.list');
-	Route::post('/numbers', 'RedactorController@createNumbers')->name('redactor.numbers.create');
-	Route::get('/numbers/{id}/delete', 'RedactorController@deleteNumbers')->name('redactor.numbers.delete');
+	Route::middleware(['isRedactor'])->group(function () {
 
-	Route::get('/institutes', 'RedactorController@listInstitutes')->name('redactor.institutes.list');
-	Route::post('/institutes', 'RedactorController@createInstitutes')->name('redactor.institutes.create');
-	Route::get('/institutes/{id}/delete', 'RedactorController@deleteInstitutes')->name('redactor.institutes.delete');
+		Route::get('/numbers', 'RedactorController@listNumbers')->name('redactor.numbers.list');
+		Route::post('/numbers', 'RedactorController@createNumbers')->name('redactor.numbers.create');
+		Route::get('/numbers/{id}/delete', 'RedactorController@deleteNumbers')->name('redactor.numbers.delete');
+
+		Route::get('/institutes', 'RedactorController@listInstitutes')->name('redactor.institutes.list');
+		Route::post('/institutes', 'RedactorController@createInstitutes')->name('redactor.institutes.create');
+		Route::get('/institutes/{id}/delete', 'RedactorController@deleteInstitutes')->name('redactor.institutes.delete');
+
+	});
 });
 
 Route::get('/', 'GuestController@listNumbers')->name('numbers.list');
-Route::post('/', 'GuestController@findNumbers')->name('numbers.find');
+Route::get('/export/short', 'GuestController@exportShort')->name('numbers.short');
+Route::get('/export/full', 'GuestController@exportFull')->name('numbers.full');

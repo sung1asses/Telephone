@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-          <live-search institutes_json="{{ $institutes }}"></live-search>
-        </div>
-    </div>
-</div>
+<live-search institutes_json="{{ $institutes }}"></live-search>
 @endsection

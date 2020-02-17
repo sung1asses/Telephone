@@ -19,6 +19,9 @@
                     <div class="form-group">
                        <label for="name" class="col-md-5 col-form-label text-md-right">{{ __('Название института') }}</label>
                        <input type="text" min="0" class="form-control" value="{{ old('name') }}" name="name" required="">
+                      @error('name')
+                          <div class="text-danger p-2">{{ $message }}</div>
+                      @enderror
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Отправить</button>
