@@ -42,7 +42,7 @@ class AdminController extends Controller
                         ->withErrors($validation);
         };
 
-        $name = ucfirst($request['sname'])." ".ucfirst($request['fname']);
+        $name = ucfirst(strtolower($request['sname']))." ".ucfirst(strtolower($request['fname']));
         $email = strtolower($request['sname'])."_".strtolower($request['fname'])."@redactor.redactor";
         if(!User::where("email",$email)->first()){
             User::create([
@@ -77,7 +77,7 @@ class AdminController extends Controller
                         ->withErrors($validation);
         };
 
-        $name = ucfirst($request['sname'])." ".ucfirst($request['fname']);
+        $name = ucfirst(strtolower($request['sname']))." ".ucfirst(strtolower($request['fname']));
         $email = strtolower($request['sname'])."_".strtolower($request['fname'])."@number.watcher";
         if(!User::where("email",$email)->first()){
             User::create([

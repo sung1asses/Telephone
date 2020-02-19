@@ -18,8 +18,8 @@ class NumbersExportFull implements FromCollection, WithHeadings, ShouldAutoSize
         return [
             'Внутренние номера',
             'Ф.И.О.',
-            'Кабинет',
             'Должность',
+            'Кабинет',
             'Почта',
         ];
     }

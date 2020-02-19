@@ -1969,20 +1969,27 @@ __webpack_require__.r(__webpack_exports__);
     filteredList: function filteredList() {
       var _this = this;
 
-      this.search_list = [];
       var value = this.search.toLowerCase();
-      this.main_list.forEach(function (item) {
-        var elements = item.numbers.filter(function (number) {
-          return number.name.toLowerCase().indexOf(value) > -1 || number.position.toLowerCase().indexOf(value) > -1 || number.cabinet.toLowerCase().indexOf(value) > -1 || number.local_number.toLowerCase().indexOf(value) > -1;
-        });
-
-        if (elements.length > 0) {
-          var new_item = item;
-          new_item.numbers = elements;
-
-          _this.search_list.push(new_item);
-        }
+      this.search_list = this.main_list.filter(function (number) {
+        return number.name.toLowerCase().indexOf(value) > -1;
       });
+      console.log(this.search_list);
+      var flag = this.search_list.length == 0 ? true : false;
+
+      if (flag) {
+        this.main_list.forEach(function (item) {
+          var elements = item.numbers.filter(function (number) {
+            return number.name.toLowerCase().indexOf(value) > -1 || number.position.toLowerCase().indexOf(value) > -1 || number.cabinet.toLowerCase().indexOf(value) > -1 || number.local_number.toLowerCase().indexOf(value) > -1;
+          });
+
+          if (elements.length > 0) {
+            var new_item = item;
+            new_item.numbers = elements;
+
+            _this.search_list.push(new_item);
+          }
+        });
+      }
     }
   }
 });
@@ -2058,20 +2065,27 @@ __webpack_require__.r(__webpack_exports__);
     filteredList: function filteredList() {
       var _this = this;
 
-      this.search_list = [];
       var value = this.search.toLowerCase();
-      this.main_list.forEach(function (item) {
-        var elements = item.numbers.filter(function (number) {
-          return number.name.toLowerCase().indexOf(value) > -1 || number.position.toLowerCase().indexOf(value) > -1 || number.cabinet.toLowerCase().indexOf(value) > -1 || number.local_number.toLowerCase().indexOf(value) > -1;
-        });
-
-        if (elements.length > 0) {
-          var new_item = item;
-          new_item.numbers = elements;
-
-          _this.search_list.push(new_item);
-        }
+      this.search_list = this.main_list.filter(function (number) {
+        return number.name.toLowerCase().indexOf(value) > -1;
       });
+      console.log(this.search_list);
+      var flag = this.search_list.length == 0 ? true : false;
+
+      if (flag) {
+        this.main_list.forEach(function (item) {
+          var elements = item.numbers.filter(function (number) {
+            return number.name.toLowerCase().indexOf(value) > -1 || number.position.toLowerCase().indexOf(value) > -1 || number.cabinet.toLowerCase().indexOf(value) > -1 || number.local_number.toLowerCase().indexOf(value) > -1;
+          });
+
+          if (elements.length > 0) {
+            var new_item = item;
+            new_item.numbers = elements;
+
+            _this.search_list.push(new_item);
+          }
+        });
+      }
     }
   }
 });
@@ -37449,7 +37463,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
-    _c("div", { staticClass: "row justify-content-center py-3" }, [
+    _c("div", { staticClass: "row justify-content-center py-3 " }, [
       _c("div", { staticClass: "col-8 mx-auto" }, [
         _c("input", {
           directives: [
@@ -37461,7 +37475,7 @@ var render = function() {
             }
           ],
           staticClass: "search-aues w-100 m-3 p-2",
-          attrs: { type: "text", placeholder: "Поиск..." },
+          attrs: { type: "text", placeholder: "Поиск...", autofocus: "true" },
           domProps: { value: _vm.search },
           on: {
             input: [
@@ -37487,17 +37501,12 @@ var render = function() {
             _vm._m(0),
             _vm._v(" "),
             _vm._l(_vm.search_list, function(item) {
-              return _c("table", { staticClass: "table" }, [
+              return _c("table", { staticClass: "table text-center" }, [
                 _c("thead", { staticClass: "thead-aues" }, [
                   _c("tr", [
-                    _c(
-                      "th",
-                      {
-                        staticClass: "text-center",
-                        attrs: { colspan: "6", scope: "col" }
-                      },
-                      [_vm._v(_vm._s(item.name))]
-                    )
+                    _c("th", { attrs: { colspan: "6", scope: "col" } }, [
+                      _vm._v(_vm._s(item.name))
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
@@ -37509,7 +37518,7 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "col-md-2 col-12 d-md-table-cell d-flex justify-content-between align-middle",
+                            "col-md-1 col-12 d-md-table-cell d-flex justify-content-between align-middle",
                           attrs: { scope: "row" }
                         },
                         [
@@ -37526,7 +37535,7 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "col-md-2 col-12 d-md-table-cell d-flex justify-content-between align-middle",
+                            "col-md-4 col-12 d-md-table-cell d-flex justify-content-between align-middle",
                           attrs: { scope: "col" }
                         },
                         [
@@ -37543,7 +37552,7 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "col-md-2 col-12 d-md-table-cell d-flex justify-content-between align-middle",
+                            "col-md-3 col-12 d-md-table-cell d-flex justify-content-between align-middle",
                           attrs: { scope: "col" }
                         },
                         [
@@ -37560,7 +37569,7 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "col-md-2 col-12 d-md-table-cell d-flex justify-content-between align-middle",
+                            "col-md-1 col-12 d-md-table-cell d-flex justify-content-between align-middle",
                           attrs: { scope: "col" }
                         },
                         [
@@ -37577,7 +37586,7 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "col-md-2 col-12 d-md-table-cell d-flex justify-content-between align-middle",
+                            "col-md-3 col-12 d-md-table-cell d-flex justify-content-between align-middle",
                           attrs: { scope: "col" }
                         },
                         [
@@ -37607,41 +37616,45 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "table d-md-table d-none" }, [
-      _c("thead", { staticClass: "thead-aues" }, [
-        _c("tr", [
-          _c(
-            "th",
-            { staticClass: "col-2 align-middle", attrs: { scope: "row" } },
-            [_vm._v("Внутренние номера")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
-            [_vm._v("Ф.И.О.")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
-            [_vm._v("Должность")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
-            [_vm._v("Кабинет")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
-            [_vm._v("E-mail")]
-          )
+    return _c(
+      "table",
+      { staticClass: "table d-md-table d-none sticky-top text-center" },
+      [
+        _c("thead", { staticClass: "thead-aues" }, [
+          _c("tr", [
+            _c(
+              "th",
+              { staticClass: "col-1 align-middle", attrs: { scope: "row" } },
+              [_vm._v("Внутренние номера")]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              { staticClass: "col-4 align-middle", attrs: { scope: "col" } },
+              [_vm._v("Ф.И.О.")]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              { staticClass: "col-3 align-middle", attrs: { scope: "col" } },
+              [_vm._v("Должность")]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              { staticClass: "col-1 align-middle", attrs: { scope: "col" } },
+              [_vm._v("Кабинет")]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              { staticClass: "col-3 align-middle", attrs: { scope: "col" } },
+              [_vm._v("E-mail")]
+            )
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -37678,7 +37691,7 @@ var render = function() {
             }
           ],
           staticClass: "search-aues w-100 m-3 p-1",
-          attrs: { type: "text", placeholder: "Поиск..." },
+          attrs: { type: "text", placeholder: "Поиск...", autofocus: "true" },
           domProps: { value: _vm.search },
           on: {
             input: [
@@ -37703,17 +37716,12 @@ var render = function() {
           _vm._m(0),
           _vm._v(" "),
           _vm._l(_vm.search_list, function(item) {
-            return _c("table", { staticClass: "table" }, [
+            return _c("table", { staticClass: "table text-center" }, [
               _c("thead", { staticClass: "thead-aues" }, [
                 _c("tr", [
-                  _c(
-                    "th",
-                    {
-                      staticClass: "text-center",
-                      attrs: { colspan: "6", scope: "col" }
-                    },
-                    [_vm._v(_vm._s(item.name))]
-                  )
+                  _c("th", { attrs: { colspan: "6", scope: "col" } }, [
+                    _vm._v(_vm._s(item.name))
+                  ])
                 ])
               ]),
               _vm._v(" "),
@@ -37725,13 +37733,13 @@ var render = function() {
                       "th",
                       {
                         staticClass:
-                          "col-md-2 col-12 d-md-table-cell d-flex justify-content-between align-middle",
+                          "col-lg-1 col-12 d-lg-table-cell d-flex justify-content-between align-middle",
                         attrs: { scope: "row" }
                       },
                       [
                         _c(
                           "span",
-                          { staticClass: "mr-auto d-md-none d-block" },
+                          { staticClass: "mr-auto d-lg-none d-block" },
                           [_vm._v("Внутренний номер: ")]
                         ),
                         _vm._v(_vm._s(number.local_number))
@@ -37742,13 +37750,13 @@ var render = function() {
                       "th",
                       {
                         staticClass:
-                          "col-md-2 col-12 d-md-table-cell d-flex justify-content-between align-middle",
+                          "col-lg-3 col-12 d-lg-table-cell d-flex justify-content-between align-middle",
                         attrs: { scope: "col" }
                       },
                       [
                         _c(
                           "span",
-                          { staticClass: "mr-auto d-md-none d-block" },
+                          { staticClass: "mr-auto d-lg-none d-block" },
                           [_vm._v("Ф.И.О.: ")]
                         ),
                         _vm._v(_vm._s(number.name))
@@ -37759,13 +37767,13 @@ var render = function() {
                       "th",
                       {
                         staticClass:
-                          "col-md-2 col-12 d-md-table-cell d-flex justify-content-between align-middle",
+                          "col-lg-2 col-12 d-lg-table-cell d-flex justify-content-between align-middle",
                         attrs: { scope: "col" }
                       },
                       [
                         _c(
                           "span",
-                          { staticClass: "mr-auto d-md-none d-block" },
+                          { staticClass: "mr-auto d-lg-none d-block" },
                           [_vm._v("Должность: ")]
                         ),
                         _vm._v(_vm._s(number.position))
@@ -37776,13 +37784,13 @@ var render = function() {
                       "th",
                       {
                         staticClass:
-                          "col-md-2 col-12 d-md-table-cell d-flex justify-content-between align-middle",
+                          "col-lg-1 col-12 d-lg-table-cell d-flex justify-content-between align-middle",
                         attrs: { scope: "col" }
                       },
                       [
                         _c(
                           "span",
-                          { staticClass: "mr-auto d-md-none d-block" },
+                          { staticClass: "mr-auto d-lg-none d-block" },
                           [_vm._v("Кабинет: ")]
                         ),
                         _vm._v(_vm._s(number.cabinet))
@@ -37793,13 +37801,13 @@ var render = function() {
                       "th",
                       {
                         staticClass:
-                          "col-md-2 col-12 d-md-table-cell d-flex justify-content-between align-middle",
+                          "col-lg-3 col-12 d-lg-table-cell d-flex justify-content-between align-middle",
                         attrs: { scope: "col" }
                       },
                       [
                         _c(
                           "span",
-                          { staticClass: "mr-auto d-md-none d-block" },
+                          { staticClass: "mr-auto d-lg-none d-block" },
                           [_vm._v("E-mail: ")]
                         ),
                         _vm._v(_vm._s(number.email))
@@ -37810,13 +37818,13 @@ var render = function() {
                       "th",
                       {
                         staticClass:
-                          "col-md-2 col-12 d-md-table-cell d-flex justify-content-between align-middle",
+                          "col-lg-2 col-12 d-lg-table-cell d-flex justify-content-between align-middle",
                         attrs: { scope: "col" }
                       },
                       [
                         _c(
                           "span",
-                          { staticClass: "mr-auto d-md-none d-block" },
+                          { staticClass: "mr-auto d-lg-none d-block" },
                           [_vm._v("Сотовый номер: ")]
                         ),
                         _vm._v(_vm._s(number.telephone_number))
@@ -37839,47 +37847,51 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "table d-md-table d-none" }, [
-      _c("thead", { staticClass: "thead-aues" }, [
-        _c("tr", [
-          _c(
-            "th",
-            { staticClass: "col-2 align-middle", attrs: { scope: "row" } },
-            [_vm._v("Внутренние номера")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
-            [_vm._v("Ф.И.О.")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
-            [_vm._v("Должность")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
-            [_vm._v("Кабинет")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
-            [_vm._v("E-mail")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
-            [_vm._v("Сотовый номер")]
-          )
+    return _c(
+      "table",
+      { staticClass: "table d-lg-table d-none sticky-top text-center" },
+      [
+        _c("thead", { staticClass: "thead-aues" }, [
+          _c("tr", [
+            _c(
+              "th",
+              { staticClass: "col-1 align-middle", attrs: { scope: "row" } },
+              [_vm._v("Внутренние номера")]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              { staticClass: "col-3 align-middle", attrs: { scope: "col" } },
+              [_vm._v("Ф.И.О.")]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
+              [_vm._v("Должность")]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              { staticClass: "col-1 align-middle", attrs: { scope: "col" } },
+              [_vm._v("Кабинет")]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              { staticClass: "col-3 align-middle", attrs: { scope: "col" } },
+              [_vm._v("E-mail")]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              { staticClass: "col-2 align-middle", attrs: { scope: "col" } },
+              [_vm._v("Сотовый номер")]
+            )
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -50202,14 +50214,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************!*\
   !*** ./resources/js/components/LiveSearchAdmin.vue ***!
   \*****************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LiveSearchAdmin_vue_vue_type_template_id_d3200e40___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LiveSearchAdmin.vue?vue&type=template&id=d3200e40& */ "./resources/js/components/LiveSearchAdmin.vue?vue&type=template&id=d3200e40&");
 /* harmony import */ var _LiveSearchAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LiveSearchAdmin.vue?vue&type=script&lang=js& */ "./resources/js/components/LiveSearchAdmin.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _LiveSearchAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _LiveSearchAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -50239,7 +50252,7 @@ component.options.__file = "resources/js/components/LiveSearchAdmin.vue"
 /*!******************************************************************************!*\
   !*** ./resources/js/components/LiveSearchAdmin.vue?vue&type=script&lang=js& ***!
   \******************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

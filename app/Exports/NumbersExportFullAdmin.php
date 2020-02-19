@@ -18,8 +18,8 @@ class NumbersExportFullAdmin implements FromCollection, WithHeadings, ShouldAuto
         return [
             'Внутренние номера',
             'Ф.И.О.',
-            'Кабинет',
             'Должность',
+            'Кабинет',
             'Почта',
             'Телефон'
         ];
