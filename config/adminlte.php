@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => 'Звони на <b>АТС</b>',
+    'logo' => '<b>IP</b>phone',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image-xl',
     'logo_img_xl' => null,
