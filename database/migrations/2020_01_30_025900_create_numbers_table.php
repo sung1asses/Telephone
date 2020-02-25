@@ -16,15 +16,15 @@ class CreateNumbersTable extends Migration
         Schema::create('numbers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('position');
-            $table->string('cabinet');
-            $table->string('email');
+            $table->string('position')->nullable();
+            $table->string('cabinet')->nullable();
+            $table->string('email')->nullable();
 
             $table->unsignedBigInteger('institute_id')->index();
             $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             
-            $table->string('local_number');
-            $table->string('telephone_number');
+            $table->string('local_number')->nullable();
+            $table->string('telephone_number')->nullable();
             $table->timestamps();
         });
     }
