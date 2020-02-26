@@ -5,50 +5,114 @@
                 <input class="search-aues w-100 m-3 p-1" v-on:input="filteredList" type="text" v-model="search" placeholder="Поиск..." autofocus="true">
             </div>
         </div>
+
+        <div v-if="is_redactor" id="update_number_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update_number_modal" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Изменить запись</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <p v-if="errors.length">
+                    <b>Ошибки:</b>
+                    <ul>
+                      <li v-for="error in errors">{{ error }}</li>
+                    </ul>
+                  </p>
+                  <div class="row">
+                        <div class="form-group col-sm-6">
+                           <label for="name" class="col col-form-label text-md-right">Почта</label>
+                           <input type="text" min="0" class="form-control" v-model="email">
+                        </div>
+                        <div class="form-group col-sm-6">
+                           <label for="name" class="col col-form-label text-md-right">ФИО сотрудника</label>
+                           <input type="text" min="0" class="form-control" v-model="name">
+                        </div>
+                        <div class="form-group col-sm-6">
+                           <label for="name" class="col col-form-label text-md-right">Должность</label>
+                           <input type="text" min="0" class="form-control" v-model="position">
+                        </div>
+                        <div class="form-group col-sm-6">
+                           <label for="name" class="col col-form-label text-md-right">Кабинет</label>
+                           <input type="text" min="0" class="form-control" v-model="cabinet">
+                        </div>
+                        <div class="form-group col-sm-6">
+                           <label for="name" class="col col-form-label text-md-right">Внутренний номер</label>
+                           <input type="text" min="0" class="form-control" v-model="local_number">
+                        </div>
+                        <div class="form-group col-sm-6">
+                           <label for="name" class="col col-form-label text-md-right">Мобильный номер</label>
+                           <input type="text" min="0" class="form-control" v-model="telephone_number">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button v-on:click="submit_update_number" type="button" class="btn btn-primary">Отправить</button>
+                </div>
+
+            </div>
+          </div>
+        </div>
+
           <div class="row justify-content-center">
             <div class="col-12">
                 <table class="table d-lg-table d-none sticky-top text-center">
                   <thead class="thead-aues">
-                    <tr>
-                      <th class="col-1 align-middle" scope="row">Внутренние номера</th>
-                      <th class="col-3 align-middle" scope="col">Ф.И.О.</th>
-                      <th class="col-2 align-middle" scope="col">Должность</th>
-                      <th class="col-1 align-middle" scope="col">Кабинет</th>
-                      <th class="col-3 align-middle" scope="col">E-mail</th>
-                      <th class="col-2 align-middle" scope="col">Сотовый номер</th>
+                    <tr class="row">
+                      <th class="col-1 d-flex justify-content-center align-items-center" scope="col">Внутренние номера</th>
+                      <th class="col-3 d-flex justify-content-center align-items-center" scope="col">Ф.И.О.</th>
+                      <th class="col-3 d-flex justify-content-center align-items-center" scope="col">Должность</th>
+                      <th class="col-1 d-flex justify-content-center align-items-center" scope="col">Кабинет</th>
+                      <th class="col-2 d-flex justify-content-center align-items-center" scope="col">E-mail</th>
+                      <th class="col-2 d-flex justify-content-center align-items-center" scope="col">Сотовый номер</th>
                     </tr>
                   </thead>
                 </table>
                 <table v-for="item in search_list" class="table text-center">
                   <thead class="thead-aues">
-                    <tr>
-                      <th colspan="6" scope="col">{{ item.name }}</th>
+                    <tr class="row">
+                      <th scope="col" class="col">{{ item.name }}</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="number in item.numbers" class="border-bottom-aues">
+                    <tr v-on:click="update_number(number)" v-for="number in item.numbers" class="border-bottom-aues row">
                       <th class="col-lg-1 col-12 d-lg-table-cell d-flex justify-content-between align-middle" scope="row"><span class="mr-auto d-lg-none d-block">Внутренний номер: </span>{{ number.local_number }}</th>
                       <th class="col-lg-3 col-12 d-lg-table-cell d-flex justify-content-between align-middle" scope="col"><span class="mr-auto d-lg-none d-block">Ф.И.О.: </span>{{ number.name }}</th>
-                      <th class="col-lg-2 col-12 d-lg-table-cell d-flex justify-content-between align-middle" scope="col"><span class="mr-auto d-lg-none d-block">Должность: </span>{{ number.position }}</th>
+                      <th class="col-lg-3 col-12 d-lg-table-cell d-flex justify-content-between align-middle" scope="col"><span class="mr-auto d-lg-none d-block">Должность: </span>{{ number.position }}</th>
                       <th class="col-lg-1 col-12 d-lg-table-cell d-flex justify-content-between align-middle" scope="col"><span class="mr-auto d-lg-none d-block">Кабинет: </span>{{ number.cabinet }}</th>
-                      <th class="col-lg-3 col-12 d-lg-table-cell d-flex justify-content-between align-middle" scope="col"><span class="mr-auto d-lg-none d-block">E-mail: </span>{{ number.email }}</th>
+                      <th class="col-lg-2 col-12 d-lg-table-cell d-flex justify-content-between align-middle" scope="col"><span class="mr-auto d-lg-none d-block">E-mail: </span>{{ number.email }}</th>
                       <th class="col-lg-2 col-12 d-lg-table-cell d-flex justify-content-between align-middle" scope="col"><span class="mr-auto d-lg-none d-block">Сотовый номер: </span>{{ number.telephone_number }}</th>
                     </tr>
                   </tbody>
                 </table>
             </div>
         </div>
+        <!--  -->
     </div>
 </template>
 
 <script>
     export default {
-        props:['institutes_json'],
+        props:['institutes_json', 'is_redactor', 'update_url'],
         data:function(){
             return{
                 search: '',
                 main_list: JSON.parse(this.institutes_json),
                 search_list: [],
+
+                errors: [],
+                id: '',
+                email: '',
+                name: '',
+                position: '',
+                cabinet: '',
+                local_number: '',
+                telephone_number: '',
             }
         },
         mounted() {
@@ -63,21 +127,66 @@
                 this.search_list = this.main_list.filter(number => {
                       return number.name.toLowerCase().indexOf(value) > -1
                     })
-                console.log(this.search_list);
-                let flag = (this.search_list.length==0)?true:false;
-                if (flag) {
-                    this.main_list.forEach(item => {
-                        let elements = item.numbers.filter(number => {
-                            return number.name.toLowerCase().indexOf(value) > -1 ||
-                            number.position.toLowerCase().indexOf(value) > -1 ||
-                            number.cabinet.toLowerCase().indexOf(value) > -1 ||
-                            number.local_number.toLowerCase().indexOf(value) > -1
-                        })
-                        if(elements.length > 0){
-                            let new_item = item;
-                            new_item.numbers = elements;
-                            this.search_list.push(new_item);
-                        }
+                this.main_list.forEach(item => {
+                    let elements = item.numbers.filter(number => {
+                        return number.name.toLowerCase().indexOf(value) > -1 ||
+                        number.position.toLowerCase().indexOf(value) > -1 ||
+                        number.cabinet.toLowerCase().indexOf(value) > -1 ||
+                        number.local_number.toLowerCase().indexOf(value) > -1
+                    })
+                    if(elements.length > 0){
+                        let new_item = item;
+                        new_item.numbers = elements;
+                        this.search_list.push(new_item);
+                    }
+                })
+            },
+            update_number(number) {
+                $('#update_number_modal').modal('show');
+                this.id = number.id;
+                this.email = number.email;
+                this.name = number.name;
+                this.position = number.position;
+                this.cabinet = number.cabinet;
+                this.local_number = number.local_number;
+                this.telephone_number = number.telephone_number;
+            },
+            submit_update_number(){
+                this.errors = [];
+                if (!this.name) {
+                    this.errors.push('Укажите ФИО.');
+                }
+                if (!this.name.length>=255) {
+                    this.errors.push('Слишком длинное ФИО.');
+                }
+                if (!this.email.length>=255) {
+                    this.errors.push('Слишком длинная Почта.');
+                }
+                if (!this.position.length>=255) {
+                    this.errors.push('Слишком длинная должность.');
+                }
+                if (!this.cabinet.length>=255) {
+                    this.errors.push('Слишком длинный кабинет.');
+                }
+
+                if(!this.errors.length){
+                    axios.post('/admin/numbers/'+this.id+'/update', {
+                        email: this.email,
+                        name: this.name,
+                        position: this.position,
+                        cabinet: this.cabinet,
+                        local_number: this.local_number,
+                        telephone_number: this.telephone_number,
+                    })
+                    .then((response) => {
+                      console.log(response);
+                      this.main_list = response.data;
+                      this.filteredList()
+                      $('#update_number_modal').modal('hide');
+                    })
+                    .catch((error) => {
+                        console.log(response)
+                        this.errors.push('Что-то пошло не так, проверьте поля ввода.')
                     })
                 }
             }

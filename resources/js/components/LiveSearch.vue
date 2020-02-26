@@ -10,23 +10,23 @@
               <div class="col-12">
                   <table class="table d-md-table d-none sticky-top text-center">
                     <thead class="thead-aues">
-                      <tr>
-                        <th class="col-1 align-middle" scope="row">Внутренние номера</th>
-                        <th class="col-4 align-middle" scope="col">Ф.И.О.</th>
-                        <th class="col-3 align-middle" scope="col">Должность</th>
-                        <th class="col-1 align-middle" scope="col">Кабинет</th>
-                        <th class="col-3 align-middle" scope="col">E-mail</th>
+                      <tr class="row">
+                        <th class="col-1 d-flex justify-content-center align-items-center" scope="col">Внутренние номера</th>
+                        <th class="col-4 d-flex justify-content-center align-items-center" scope="col">Ф.И.О.</th>
+                        <th class="col-3 d-flex justify-content-center align-items-center" scope="col">Должность</th>
+                        <th class="col-1 d-flex justify-content-center align-items-center" scope="col">Кабинет</th>
+                        <th class="col-3 d-flex justify-content-center align-items-center" scope="col">E-mail</th>
                       </tr>
                     </thead>
                   </table>
                   <table v-for="item in search_list" class="table text-center">
                     <thead class="thead-aues">
-                      <tr>
-                        <th colspan="6" scope="col">{{ item.name }}</th>
+                      <tr class="row">
+                        <th scope="col" class="col">{{ item.name }}</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="number in item.numbers" class="border-bottom-aues">
+                      <tr v-for="number in item.numbers" class="border-bottom-aues row">
                         <th class="col-md-1 col-12 d-md-table-cell d-flex justify-content-between align-middle" scope="row"><span class="mr-auto d-md-none d-block">Внутренний номер: </span>{{ number.local_number }}</th>
                         <th class="col-md-4 col-12 d-md-table-cell d-flex justify-content-between align-middle" scope="col"><span class="mr-auto d-md-none d-block">Ф.И.О.: </span>{{ number.name }}</th>
                         <th class="col-md-3 col-12 d-md-table-cell d-flex justify-content-between align-middle" scope="col"><span class="mr-auto d-md-none d-block">Должность: </span>{{ number.position }}</th>
@@ -65,22 +65,19 @@
                       return number.name.toLowerCase().indexOf(value) > -1
                     })
                 console.log(this.search_list);
-                let flag = (this.search_list.length==0)?true:false;
-                if (flag) {
-                    this.main_list.forEach(item => {
-                        let elements = item.numbers.filter(number => {
-                            return number.name.toLowerCase().indexOf(value) > -1 ||
-                            number.position.toLowerCase().indexOf(value) > -1 ||
-                            number.cabinet.toLowerCase().indexOf(value) > -1 ||
-                            number.local_number.toLowerCase().indexOf(value) > -1
-                        })
-                        if(elements.length > 0){
-                            let new_item = item;
-                            new_item.numbers = elements;
-                            this.search_list.push(new_item);
-                        }
+                this.main_list.forEach(item => {
+                    let elements = item.numbers.filter(number => {
+                        return number.name.toLowerCase().indexOf(value) > -1 ||
+                        number.position.toLowerCase().indexOf(value) > -1 ||
+                        number.cabinet.toLowerCase().indexOf(value) > -1 ||
+                        number.local_number.toLowerCase().indexOf(value) > -1
                     })
-                }
+                    if(elements.length > 0){
+                        let new_item = item;
+                        new_item.numbers = elements;
+                        this.search_list.push(new_item);
+                    }
+                })
             }
         }
     }
