@@ -17,5 +17,5 @@
 		</div>
 	</div>
 </div>
-<live-search-admin institutes_json="{{ $institutes }}" is_redactor="{{ Gate::allows('isRedactor')?true:false }}"></live-search-admin>
+<live-search-admin institutes_json="{{ $institutes }}" is_redactor="true"></live-search-admin>
 @stop

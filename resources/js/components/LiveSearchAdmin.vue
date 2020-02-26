@@ -98,7 +98,7 @@
 
 <script>
     export default {
-        props:['institutes_json', 'is_redactor', 'update_url'],
+        props:['institutes_json', 'is_redactor'],
         data:function(){
             return{
                 search: '',
@@ -135,13 +135,14 @@
                         number.local_number.toLowerCase().indexOf(value) > -1
                     })
                     if(elements.length > 0){
-                        let new_item = item;
+                        let new_item = {'name': item.name};
                         new_item.numbers = elements;
                         this.search_list.push(new_item);
                     }
                 })
             },
             update_number(number) {
+              if(this.is_redactor){
                 $('#update_number_modal').modal('show');
                 this.id = number.id;
                 this.email = number.email;
@@ -150,6 +151,7 @@
                 this.cabinet = number.cabinet;
                 this.local_number = number.local_number;
                 this.telephone_number = number.telephone_number;
+              }
             },
             submit_update_number(){
                 this.errors = [];

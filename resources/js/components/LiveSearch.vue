@@ -52,7 +52,6 @@
             }
         },
         mounted() {
-          console.log(this.main_list)
           this.filteredList();
         },
         computed: {
@@ -64,7 +63,6 @@
                 this.search_list = this.main_list.filter(number => {
                       return number.name.toLowerCase().indexOf(value) > -1
                     })
-                console.log(this.search_list);
                 this.main_list.forEach(item => {
                     let elements = item.numbers.filter(number => {
                         return number.name.toLowerCase().indexOf(value) > -1 ||
@@ -73,7 +71,7 @@
                         number.local_number.toLowerCase().indexOf(value) > -1
                     })
                     if(elements.length > 0){
-                        let new_item = item;
+                        let new_item = {'name': item.name};
                         new_item.numbers = elements;
                         this.search_list.push(new_item);
                     }

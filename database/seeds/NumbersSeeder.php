@@ -1530,7 +1530,7 @@ class NumbersSeeder extends Seeder
                 'name' => "Абдешова Айнур Алимовна",
                 'position' => "Юрисконсульт",
                 'cabinet' => "А-218",
-                'email' => "a.abdesheva@aues.kz",
+                'email' => "a.abdeshova@aues.kz",
                 'local_number' => "6981",
                 'telephone_number' => "",
                 'structure' => "Отдел правого обеспечения"
