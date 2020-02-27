@@ -6,18 +6,18 @@
             </div>
         </div>
 
-        <div v-if="is_redactor" id="update_number_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update_number_modal" aria-hidden="true">
+        <div v-if="is_redactor" id="update_number_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update_number_modal_title" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Изменить запись</h5>
+                    <h5 class="modal-title" id="update_number_modal_title">Изменить запись</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                  <p v-if="errors.length">
+                  <p class="text-danger" v-if="errors.length">
                     <b>Ошибки:</b>
                     <ul>
                       <li v-for="error in errors">{{ error }}</li>
@@ -50,9 +50,40 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button v-on:click="submit_update_number" type="button" class="btn btn-primary">Отправить</button>
+                <div class="modal-footer d-flex justify-content-between align-items-center">
+                    <button v-on:click="submit_delete_number" type="button" class="btn btn-danger">Удалить</button>
+                    <button v-on:click="submit_update_number" type="button" class="btn btn-primary">Изменить</button>
+                </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div v-if="is_redactor" id="update_structure_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update_structure_modal_title" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="update_structure_modal_title">Изменить запись</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <p class="text-danger" v-if="structure_errors.length">
+                    <b>Ошибки:</b>
+                    <ul>
+                      <li v-for="error in structure_errors">{{ error }}</li>
+                    </ul>
+                  </p>
+                  <div class="row">
+                        <div class="form-group col">
+                           <input type="text" min="0" class="form-control" v-model="structure_name">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between align-items-center">
+                    <button v-on:click="submit_update_structure" type="button" class="btn btn-primary">Изменить</button>
                 </div>
 
             </div>
@@ -75,7 +106,7 @@
                 </table>
                 <table v-for="item in search_list" class="table text-center">
                   <thead class="thead-aues">
-                    <tr class="row">
+                    <tr v-on:click="update_structure(item)" class="row">
                       <th scope="col" class="col">{{ item.name }}</th>
                     </tr>
                   </thead>
@@ -104,6 +135,11 @@
                 search: '',
                 main_list: JSON.parse(this.institutes_json),
                 search_list: [],
+
+                structure_errors: [],
+                structure_id: '',
+                structure_name: '',
+
 
                 errors: [],
                 id: '',
@@ -140,6 +176,39 @@
                         this.search_list.push(new_item);
                     }
                 })
+            },
+
+            update_structure(structure) {
+              if(this.is_redactor){
+                $('#update_structure_modal').modal('show');
+                this.structure_name = structure.name;
+                this.structure_id = structure.id;
+              }
+            },
+            submit_update_structure(){
+                this.structure_errors = [];
+                if (!this.structure_name) {
+                    this.structure_errors.push('Укажите название');
+                }
+                if (!this.structure_name.length>=255) {
+                    this.structure_errors.push('Слишком длинное название.');
+                }
+
+                if(!this.structure_errors.length){
+                    axios.post('/admin/institutes/'+this.structure_id+'/update', {
+                        name: this.structure_name,
+                    })
+                    .then((response) => {
+                      console.log(response);
+                      this.main_list = response.data;
+                      this.filteredList();
+                      $('#update_structure_modal').modal('hide');
+                    })
+                    .catch((error) => {
+                        console.log(response)
+                        this.structure_errors.push('Что-то пошло не так, проверьте поля ввода.')
+                    })
+                }
             },
             update_number(number) {
               if(this.is_redactor){
@@ -183,7 +252,7 @@
                     .then((response) => {
                       console.log(response);
                       this.main_list = response.data;
-                      this.filteredList()
+                      this.filteredList();
                       $('#update_number_modal').modal('hide');
                     })
                     .catch((error) => {
@@ -191,6 +260,20 @@
                         this.errors.push('Что-то пошло не так, проверьте поля ввода.')
                     })
                 }
+            },
+            submit_delete_number(){
+                this.errors = [];
+                axios.post('/admin/numbers/'+this.id+'/delete', {})
+                .then((response) => {
+                  console.log(response);
+                  this.main_list = response.data;
+                  this.filteredList();
+                  $('#update_number_modal').modal('hide');
+                })
+                .catch((error) => {
+                    console.log(response)
+                    this.errors.push('Что-то пошло не так, проверьте поля ввода.')
+                })
             }
         }
     }

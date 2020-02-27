@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
 
         $admin = \App\User::create([
 	        'name' => 'Admin',
-	        'email' => 'admin@admin.admin',
-	        'password' => Illuminate\Support\Facades\Hash::make('password'),
+	        'email' => 'admin',
+	        'password' => Illuminate\Support\Facades\Hash::make('3@IPphone_Admin!$'),
 	    ])->attachRole($adminRole);
 
 	    $redactorRole = \HttpOz\Roles\Models\Role::create([
@@ -37,13 +37,6 @@ class DatabaseSeeder extends Seeder
 	        'description' => 'watch numbers.', // optional
 	        'group' => 'watcher' // optional, set as 'default' by default
 	    ]);
-
-        \App\User::create([
-	        'name' => 'Suvorov Roman',
-	        'email' => 'suvorov_roman@redactor.redactor',
-	        'password' => Illuminate\Support\Facades\Hash::make('redactor'),
-	    ])->attachRole($redactorRole);
-
         
         // $faker = Faker\Factory::create("ru_RU");
 

@@ -41,10 +41,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 		Route::get('/numbers', 'RedactorController@listNumbers')->name('redactor.numbers.list');
 		Route::post('/numbers', 'RedactorController@createNumbers')->name('redactor.numbers.create');
 		Route::post('/numbers/{id}/update', 'RedactorController@updateNumbers')->name('redactor.numbers.update');
-		Route::get('/numbers/{id}/delete', 'RedactorController@deleteNumbers')->name('redactor.numbers.delete');
+		Route::post('/numbers/{id}/delete', 'RedactorController@deleteNumbers')->name('redactor.numbers.delete');
 
 		Route::get('/institutes', 'RedactorController@listInstitutes')->name('redactor.institutes.list');
 		Route::post('/institutes', 'RedactorController@createInstitutes')->name('redactor.institutes.create');
+		Route::post('/institutes/{id}/update', 'RedactorController@updateInstitutes')->name('redactor.institutes.update');
 		Route::get('/institutes/{id}/delete', 'RedactorController@deleteInstitutes')->name('redactor.institutes.delete');
 
 	});

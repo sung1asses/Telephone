@@ -43,7 +43,7 @@ class AdminController extends Controller
         };
 
         $name = ucfirst(strtolower($request['sname']))." ".ucfirst(strtolower($request['fname']));
-        $email = strtolower($request['sname'])."_".strtolower($request['fname'])."@redactor.redactor";
+        $email = strtolower($request['fname'])[0].".".strtolower($request['sname']).".redactor";
         if(!User::where("email",$email)->first()){
             User::create([
                 'name' => $name,
@@ -78,7 +78,7 @@ class AdminController extends Controller
         };
 
         $name = ucfirst(strtolower($request['sname']))." ".ucfirst(strtolower($request['fname']));
-        $email = strtolower($request['sname'])."_".strtolower($request['fname'])."@number.watcher";
+        $email = strtolower($request['fname'])[0].".".strtolower($request['sname']);
         if(!User::where("email",$email)->first()){
             User::create([
                 'name' => $name,

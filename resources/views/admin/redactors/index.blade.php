@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'IPphone')
 
 @section('content_header')
     <h1>Работа с редакторами</h1>

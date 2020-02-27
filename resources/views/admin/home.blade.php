@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'IPphone')
 
 @section('content_header')
     <h1 class="m-0 text-dark">Телефонный справочник</h1>
@@ -17,5 +17,5 @@
 		</div>
 	</div>
 </div>
-<live-search-admin institutes_json="{{ $institutes }}" is_redactor="true"></live-search-admin>
+<live-search-admin institutes_json="{{ $institutes }}" is_redactor="{{ Gate::allows('redactor', Auth::user())?true:false }}"></live-search-admin>
 @stop

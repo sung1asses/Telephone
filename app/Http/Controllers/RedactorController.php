@@ -47,7 +47,7 @@ class RedactorController extends Controller
     }
 
     public function updateNumbers($id, Request $request){
-        $number = Number::find($id);
+        $number = Number::findOrFail($id);
         $validation = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'name' => ['required', 'max:255'],
             'position' => ['max:255'],
@@ -72,7 +72,8 @@ class RedactorController extends Controller
 
     public function deleteNumbers($id){
         Number::find($id)->delete();
-        return redirect()->route('redactor.numbers.list');
+        $numbers = Institute::with('numbers')->get();
+        return $numbers;
     }
 
 
@@ -102,6 +103,19 @@ class RedactorController extends Controller
                 ->withInput()
                 ->with('error', 'Институт уже создан!');
     } 
+    public function updateInstitutes($id, Request $request){
+        $institute = Institute::findOrFail($id);
+        $validation = \Illuminate\Support\Facades\Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        if($validation->fails()) {
+            return false;
+        };
+        $institute->update(['name' => $request['name']]);
+        $numbers = Institute::with('numbers')->get();
+        return $numbers;
+    }
     public function deleteInstitutes($id){
         $institute = Institute::find($id);
         $institute->numbers()->delete();
