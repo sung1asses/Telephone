@@ -76,23 +76,5 @@
             </form>
         </div>
     </div>
-    <div class="col-12">
-      
-        <!-- <div class="card card-primary">
-            <div class="card-header with-border">
-              <h3 class="card-title">Список</h3>
-            </div>
-            <div class="card-body">
-            @foreach($numbers as $number)
-              <div class="d-flex justify-content-between align-items-center">
-                <p>{{ $number->name }}</p>
-                <a href="{{ route('redactor.numbers.delete',['id'=> $number->id]) }}">
-                  {{ __('Удалить') }}
-                </a>
-              </div>
-            @endforeach
-            </div>
-        </div> -->
-    </div>
 </div>
 @endsection

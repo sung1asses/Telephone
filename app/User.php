@@ -43,4 +43,8 @@ class User extends Authenticatable implements HasRoleContract
     {
         return $this->belongsToMany('\App\Role');
     }
+    public function logs()
+    {
+        return $this->hasMany('\App\Log');
+    }
 }

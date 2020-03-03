@@ -212,7 +212,17 @@ return [
             'label_color' => 'success',
             'can'  => 'redactor',
         ],
-        /*['header' => 'account_settings'],
+
+        ['header' => 'Логи'],
+        [
+            'text'        => 'Общие',
+            'url'         => 'admin/logs',
+            'icon'        => 'far fa-fw fa-file',
+            'label'       => false, // true
+            'label_color' => 'dark',
+            'can'  => 'admin',
+        ],
+        /*
         [
             'text' => 'profile',
             'url'  => 'admin/settings',

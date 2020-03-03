@@ -11,6 +11,6 @@ class Institute extends Model
 	];
     public function numbers()
     {
-    	return $this->hasMany('\App\Number');
+    	return $this->hasMany('\App\Number')->orderBy('local_number');
     }
 }

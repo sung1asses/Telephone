@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('live-search', require('./components/LiveSearch.vue').default);
 Vue.component('live-search-admin', require('./components/LiveSearchAdmin.vue').default);
+Vue.component('sort-list', require('./components/SortList.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

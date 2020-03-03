@@ -10,12 +10,11 @@ use App\User;
 use App\Number;
 use App\Role;
 use App\Institute;
+use App\Log;
 class AdminController extends Controller
 {
     public function home(){
-        $institutes = Institute::with('numbers')->get();
-        // $institutes->makeHidden('telephone_number');
-        // dd($institutes[0]->numbers);
+        $institutes = Institute::orderBy('position')->with('numbers')->get();
         return view('admin.home',compact('institutes'));
     }
 
@@ -51,11 +50,18 @@ class AdminController extends Controller
                 'password' => \Illuminate\Support\Facades\Hash::make($request['password']),
             ])->attachRole(Role::where('group', 'redactor')->first());
         }
+        \Auth::user()->logs()->create([
+            'text'=> 'Админ '.\Auth::user()->name.': Создал редактора '.$name,
+        ]);
         return redirect()->route('admin.redactor.list')
                 ->with('succ', 'Очередь успешно создана...');
     } 
     public function deleteRedactor($id){
-        User::find($id)->delete();
+        $user = User::find($id);
+        \Auth::user()->logs()->create([
+            'text'=> 'Админ '.\Auth::user()->name.': Удалил редактора '.$user->name,
+        ]);
+        $user->delete();
         return redirect()->route('admin.redactor.list');
     }
 
@@ -85,13 +91,27 @@ class AdminController extends Controller
                 'email' => $email,
                 'password' => \Illuminate\Support\Facades\Hash::make($request['password']),
             ])->attachRole(Role::where('group', 'Watcher')->first());
+
+            \Auth::user()->logs()->create([
+                'text'=> 'Админ '.\Auth::user()->name.': Создал пользователя высокого уровня '.$name,
+            ]);
         }
         return redirect()->route('admin.watcher.list')
                 ->with('succ', 'Очередь успешно создана...');
     } 
     public function deleteWatcher($id){
-        User::find($id)->delete();
+        $user = User::find($id);
+        \Auth::user()->logs()->create([
+            'text'=> 'Админ '.\Auth::user()->name.': Удалил пользователя высокого уровня '.$user->name,
+        ]);
+        $user->delete();
         return redirect()->route('admin.watcher.list');
+    }
+
+    public function logs()
+    {
+        $logs = \App\Log::limit(300)->orderBy('id', 'desc')->get();
+        return view('admin.logs', compact('logs'));
     }
 
 }

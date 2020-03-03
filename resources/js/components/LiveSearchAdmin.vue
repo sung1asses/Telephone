@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-between align-items-center">
-                    <button v-on:click="submit_delete_number" type="button" class="btn btn-danger">Удалить</button>
+                    <button v-on:click="delete_number" type="button" class="btn btn-danger">Удалить</button>
                     <button v-on:click="submit_update_number" type="button" class="btn btn-primary">Изменить</button>
                 </div>
 
@@ -59,7 +59,32 @@
           </div>
         </div>
 
-        <div v-if="is_redactor" id="update_structure_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update_structure_modal_title" aria-hidden="true">
+        <div id="confirm_delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm_delete_modal_title" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                        <div class="form-group col-12">
+                           <label for="name" class="col col-form-label text-md-right">Повторите внутренний номер: </label>
+                           <input type="text" min="0" class="form-control" v-on:input="check_delete_flag" v-model="confirm_delete">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-end align-items-center">
+                    <button :disabled="confirm_delete_flag" v-on:click="submit_delete_number" type="button" class="btn btn-danger">Удалить</button>
+                </div>
+
+            </div>
+          </div>
+        </div>
+
+         <div v-if="is_redactor" id="update_structure_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update_structure_modal_title" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
@@ -140,6 +165,8 @@
                 structure_id: '',
                 structure_name: '',
 
+                confirm_delete: '',
+                confirm_delete_flag: true,
 
                 errors: [],
                 id: '',
@@ -160,8 +187,9 @@
         methods: {
             filteredList() {
                 const value = this.search.toLowerCase();
-                this.search_list = this.main_list.filter(number => {
-                      return number.name.toLowerCase().indexOf(value) > -1
+                this.search_list = this.main_list.filter(institute => {
+                      return institute.name.toLowerCase().indexOf(value) > -1 && 
+                      institute.numbers.length!=0
                     })
                 this.main_list.forEach(item => {
                     let elements = item.numbers.filter(number => {
@@ -261,6 +289,14 @@
                     })
                 }
             },
+            check_delete_flag(){
+              if(this.confirm_delete == this.local_number)this.confirm_delete_flag=false;
+              else this.confirm_delete_flag=true;
+            },
+            delete_number(){
+                $('#confirm_delete').modal('show');
+                this.check_delete_flag();
+            },
             submit_delete_number(){
                 this.errors = [];
                 axios.post('/admin/numbers/'+this.id+'/delete', {})
@@ -269,6 +305,8 @@
                   this.main_list = response.data;
                   this.filteredList();
                   $('#update_number_modal').modal('hide');
+                  this.confirm_delete = '';
+                  $('#confirm_delete').modal('hide');
                 })
                 .catch((error) => {
                     console.log(response)

@@ -33,17 +33,10 @@
     <div class="col-md-6">
         <div class="card card-primary">
             <div class="card-header with-border">
-              <h3 class="card-title">Список</h3>
+              <h3 class="card-title">Список</h3>  
             </div>
             <div class="card-body">
-            @foreach($institutes as $institute)
-              <div class="d-flex justify-content-between align-items-center">
-                <p>{{ $institute->name }}</p>
-                <a href="{{ route('redactor.institutes.delete',['id'=> $institute->id]) }}">
-                  {{ __('Удалить') }}
-                </a>
-              </div>
-            @endforeach
+              <sort-list institutes_json="{{ $institutes }}">
             </div>
         </div>
     </div>

@@ -60,8 +60,9 @@
         methods: {
             filteredList() {
                 const value = this.search.toLowerCase();
-                this.search_list = this.main_list.filter(number => {
-                      return number.name.toLowerCase().indexOf(value) > -1
+                this.search_list = this.main_list.filter(institute => {
+                      return institute.name.toLowerCase().indexOf(value) > -1 && 
+                      institute.numbers.length!=0
                     })
                 this.main_list.forEach(item => {
                     let elements = item.numbers.filter(number => {

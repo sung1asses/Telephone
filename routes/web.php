@@ -34,6 +34,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 		Route::post('/watchers', 'AdminController@createWatcher')->name('admin.watcher.create');
 		Route::get('/watchers/{id}/delete', 'AdminController@deleteWatcher')->name('admin.watcher.delete');
 
+		// logs
+		Route::get('/logs', 'AdminController@logs')->name('admin.logs');
   	});
 
 	Route::middleware(['isRedactor'])->group(function () {
@@ -44,9 +46,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 		Route::post('/numbers/{id}/delete', 'RedactorController@deleteNumbers')->name('redactor.numbers.delete');
 
 		Route::get('/institutes', 'RedactorController@listInstitutes')->name('redactor.institutes.list');
+		Route::post('/institutes/updatePosition', 'RedactorController@updatePosition');
 		Route::post('/institutes', 'RedactorController@createInstitutes')->name('redactor.institutes.create');
 		Route::post('/institutes/{id}/update', 'RedactorController@updateInstitutes')->name('redactor.institutes.update');
-		Route::get('/institutes/{id}/delete', 'RedactorController@deleteInstitutes')->name('redactor.institutes.delete');
+		Route::post('/institutes/{id}/delete', 'RedactorController@deleteInstitutes')->name('redactor.institutes.delete');
 
 	});
 });

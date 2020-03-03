@@ -11,9 +11,7 @@ class GuestController extends Controller
 {
 
     public function listNumbers(){
-        $institutes = Institute::with('numbers')->get();
-        // $institutes->makeHidden('telephone_number');
-        // dd($institutes[0]->numbers);
+        $institutes = Institute::orderBy('position')->with('numbers')->get();
     	return view('numbers', compact('institutes'));
     }
 
