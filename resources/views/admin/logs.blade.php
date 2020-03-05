@@ -13,7 +13,7 @@
 		<div class="col">
 			<?php $i=1 ?>
 			@foreach($logs as $log)
-				<p class="h5"><?= $i++ ?> : {{ $log->text }}</p>
+				<p class="h5"><?= $i++ ?> : {!! $log->text !!}</p>
 			@endforeach
 		</div>
 	</div>

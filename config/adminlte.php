@@ -213,7 +213,10 @@ return [
             'can'  => 'redactor',
         ],
 
-        ['header' => 'Логи'],
+        [
+            'header' => 'Логи',
+            'can'  => 'admin',
+        ],
         [
             'text'        => 'Общие',
             'url'         => 'admin/logs',

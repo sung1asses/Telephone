@@ -41,13 +41,13 @@ class RedactorController extends Controller
             }
 
             \Auth::user()->logs()->create([
-                'text'=> 'Пользователь '.\Auth::user()->name.': Создал номер:  '
-                .'внутренний номер: '.$request['local_number'].', '
-                .'фио: '.$request['name'].', '
-                .'должность: '.$request['position'].', '
-                .'кабинет: '.$request['cabinet'].', '
-                .'почта: '.$request['email'].', '
-                .'телефон: '.$request['telephone_number'],
+                'text'=> 'Пользователь '.\Auth::user()->name.': Создал номер: <br>'
+                .'<b class="ml-2">внутренний номер:</b> '.$request['local_number'].', <br>'
+                .'<b class="ml-2">фио:</b> '.$request['name'].', <br>'
+                .'<b class="ml-2">должность:</b> '.$request['position'].', <br>'
+                .'<b class="ml-2">кабинет:</b> '.$request['cabinet'].', <br>'
+                .'<b class="ml-2">почта:</b> '.$request['email'].', <br>'
+                .'<b class="ml-2">телефон:</b> '.$request['telephone_number'],
             ]);
             return redirect()->route('redactor.numbers.list')
                     ->with('succ', 'Запись успешно создана!');
@@ -71,13 +71,13 @@ class RedactorController extends Controller
         };
 
         \Auth::user()->logs()->create([
-            'text'=> 'Пользователь '.\Auth::user()->name.': Обновил номер: '
-            .'внутренний номер: '.$number->local_number.' => '.$request['local_number'].', '
-            .'фио: '.$number->name.' => '.$request['name'].', '
-            .'должность: '.$number->position.' => '.$request['position'].', '
-            .'кабинет: '.$number->cabinet.' => '.$request['cabinet'].', '
-            .'почта: '.$number->email.' => '.$request['email'].', '
-            .'телефон: '.$number->telephone_number.' => '.$request['telephone_number'],
+            'text'=> 'Пользователь '.\Auth::user()->name.': Обновил номер: <br>'
+            .'<b class="ml-2">внутренний номер:</b> '.$number->local_number.' => '.$request['local_number'].', <br>'
+            .'<b class="ml-2">фио:</b> '.$number->name.' => '.$request['name'].', <br>'
+            .'<b class="ml-2">должность:</b> '.$number->position.' => '.$request['position'].', <br>'
+            .'<b class="ml-2">кабинет:</b> '.$number->cabinet.' => '.$request['cabinet'].', <br>'
+            .'<b class="ml-2">почта:</b> '.$number->email.' => '.$request['email'].', <br>'
+            .'<b class="ml-2">телефон:</b> '.$number->telephone_number.' => '.$request['telephone_number'],
         ]);
 
         $number->update([
@@ -95,13 +95,13 @@ class RedactorController extends Controller
     public function deleteNumbers($id){
         $number = Number::find($id);
         \Auth::user()->logs()->create([
-            'text'=> 'Пользователь '.\Auth::user()->name.': Удалил номер:  '
-            .'внутренний номер: '.$number->local_number.', '
-            .'фио: '.$number->name.', '
-            .'должность: '.$number->position.', '
-            .'кабинет: '.$number->cabinet.', '
-            .'почта: '.$number->email.', '
-            .'телефон: '.$number->telephone_number,
+            'text'=> 'Пользователь '.\Auth::user()->name.': Удалил номер: <br>'
+            .'<b class="ml-2">внутренний номер:</b> '.$number->local_number.', <br>'
+            .'<b class="ml-2">фио:</b> '.$number->name.', <br>'
+            .'<b class="ml-2">должность:</b> '.$number->position.', <br>'
+            .'<b class="ml-2">кабинет:</b> '.$number->cabinet.', <br>'
+            .'<b class="ml-2">почта:</b> '.$number->email.', <br>'
+            .'<b class="ml-2">телефон:</b> '.$number->telephone_number,
         ]);
         $number->delete();
         $numbers = Institute::orderBy('position')->with('numbers')->get();
@@ -140,7 +140,8 @@ class RedactorController extends Controller
             ]);
 
             \Auth::user()->logs()->create([
-                'text'=> 'Пользователь '.\Auth::user()->name.': Создал структуру университета '.$request['name'],
+                'text'=> 'Пользователь '.\Auth::user()->name.': Создал структуру университета: <br>'
+            .'<b class="ml-2">название: </b> '.$request['name']
             ]);
             return redirect()->route('redactor.institutes.list')
                     ->with('succ', 'Запись успешно создана!');
@@ -159,7 +160,8 @@ class RedactorController extends Controller
             return false;
         };
         \Auth::user()->logs()->create([
-            'text'=> 'Пользователь '.\Auth::user()->name.': Обновил структуру университета '.$institute->name.' => '.$request['name'],
+            'text'=> 'Пользователь '.\Auth::user()->name.': Обновил структуру университета: <br>'
+            .'<b class="ml-2">название: </b> '.$institute->name.' => '.$request['name']
         ]);
         $institute->update(['name' => $request['name']]);
         $numbers = Institute::orderBy('position')->with('numbers')->get();
@@ -168,7 +170,8 @@ class RedactorController extends Controller
     public function deleteInstitutes($id){
         $institute = Institute::find($id);
         \Auth::user()->logs()->create([
-            'text'=> 'Пользователь '.\Auth::user()->name.': Удалил структуру университета '.$institute->name,
+            'text'=> 'Пользователь '.\Auth::user()->name.': Удалил структуру университета: <br>'
+            .'<b class="ml-2">название: </b> '.$institute->name
         ]);
         $institute->numbers()->delete();
         $institute->delete();

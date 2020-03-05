@@ -43,28 +43,28 @@
                     </div>
                     <div class="form-group col-lg-3 col-md-4 col-sm-6">
                        <label for="name" class="col col-form-label text-md-right">{{ __('Должность') }}</label>
-                       <input type="text" min="0" class="form-control" value="{{ old('position') }}" name="position" required="">
+                       <input type="text" min="0" class="form-control" value="{{ old('position') }}" name="position">
                       @error('position')
                           <div class="text-danger p-2">{{ $message }}</div>
                       @enderror
                     </div>
                     <div class="form-group col-lg-3 col-md-4 col-sm-6">
                        <label for="name" class="col col-form-label text-md-right">{{ __('Кабинет') }}</label>
-                       <input type="text" min="0" class="form-control" value="{{ old('cabinet') }}" name="cabinet" required="">
+                       <input type="text" min="0" class="form-control" value="{{ old('cabinet') }}" name="cabinet">
                       @error('cabinet')
                           <div class="text-danger p-2">{{ $message }}</div>
                       @enderror
                     </div>
                     <div class="form-group col-lg-3 col-md-4 col-sm-6">
                        <label for="name" class="col col-form-label text-md-right">{{ __('Внутренний номер') }}</label>
-                       <input type="text" min="0" class="form-control" value="{{ old('local_number') }}" name="local_number" required="">
+                       <input type="text" min="0" class="form-control" value="{{ old('local_number') }}" name="local_number">
                       @error('local_number')
                           <div class="text-danger p-2">{{ $message }}</div>
                       @enderror
                     </div>
                     <div class="form-group col-lg-3 col-md-4 col-sm-6">
                        <label for="name" class="col col-form-label text-md-right">{{ __('Мобильный номер') }}</label>
-                       <input type="text" min="0" class="form-control" value="{{ old('telephone_number') }}" name="telephone_number" required="">
+                       <input type="text" min="0" class="form-control" value="{{ old('telephone_number') }}" name="telephone_number">
                       @error('telephone_number')
                           <div class="text-danger p-2">{{ $message }}</div>
                       @enderror
