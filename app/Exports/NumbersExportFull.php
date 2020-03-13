@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 
 use App\Number;
+use App\Institute;
 class NumbersExportFull implements FromCollection, WithHeadings, ShouldAutoSize
 {
     /**
@@ -19,6 +20,7 @@ class NumbersExportFull implements FromCollection, WithHeadings, ShouldAutoSize
             'Внутренние номера',
             'Ф.И.О.',
             'Должность',
+            'Департамент',
             'Кабинет',
             'Почта',
         ];
@@ -26,6 +28,20 @@ class NumbersExportFull implements FromCollection, WithHeadings, ShouldAutoSize
 
     public function collection()
     {
-         return Number::get(['local_number','name','position','cabinet', 'email']);
+    	$numbers = Number::with('institute')->get();
+    	$data = collect([]);
+    	$i = 0;
+		foreach ($numbers as $number) {
+    		$data[$i] = [
+    			'local_number' => $number->local_number,
+	    		'name' => $number->name,
+	    		'position' => $number->position,
+	    		'institute' => $number->institute->name,
+	    		'cabinet' => $number->cabinet, 
+	    		'email' => $number->email
+	    	];
+    		$i++;
+		}
+         return $data->sortBy('institute');
     }
 }
